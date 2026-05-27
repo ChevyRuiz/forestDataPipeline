@@ -1,0 +1,21 @@
+services:
+  py_subscriber:
+    build: .
+    container_name: py_subscriber
+    restart: always
+
+    environment:
+      DB_HOST: host.docker.internal
+      DB_PORT: 5432
+      DB_NAME: forest_data
+      DB_USER: postgres
+      DB_PASSWORD: password
+
+      MQTT_BROKER: host.docker.internal
+      MQTT_PORT: 1883
+      MQTT_TOPIC: "#"
+
+      PYTHONUNBUFFERED: "1"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

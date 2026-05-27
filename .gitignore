@@ -1,0 +1,6 @@
+# Mosquitto persistence
+mosquitto-broker/data/
+mosquitto-broker/log/
+
+# Timescale/Postgres data
+timescaledb/data/
