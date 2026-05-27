@@ -1,0 +1,23 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: timescaledb
+
+    # always restart
+    restart: always
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: forest_data
+      TIMESCALEDB_TELEMETRY: "off"
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+
+volumes:
+  timescaledb_data:
