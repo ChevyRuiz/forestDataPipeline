@@ -1,0 +1,19 @@
+services:
+  django:
+    build: .
+    container_name: database_gui_app
+
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      DB_NAME: forest_data
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_HOST: host.docker.internal
+      DB_PORT: 5432
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

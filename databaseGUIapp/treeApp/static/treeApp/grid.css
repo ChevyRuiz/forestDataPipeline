@@ -1,0 +1,165 @@
+.container {
+
+  max-width: 1400px;
+
+}
+
+body {
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+}
+
+h3 {
+
+  margin-top: 2rem;
+
+}
+
+.row {
+
+  margin-bottom: 1rem;
+
+}
+
+[class*="col"] {
+
+  height: 100px;
+
+  border: 1px solid rgba(
+    86,
+    61,
+    124,
+    .2
+  );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+.arbres [class*="col"] {
+
+  background-color: #4CAF50;
+
+  color: white;
+
+}
+
+.capteur-sol [class*="col"] {
+
+  background-color: #8B5A2B;
+
+  color: white;
+
+}
+
+.detail-row [class*="col"] {
+
+  background-color: rgba(
+    86,
+    61,
+    124,
+    .15
+  );
+
+}
+
+.sensor-block,
+.detail-block {
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+}
+
+.sensor-block:hover,
+.detail-block:hover {
+
+  filter: brightness(0.9);
+
+}
+
+.selected {
+
+  border: 5px solid black !important;
+
+}
+
+#readings-table-container {
+
+  margin-top: 1rem;
+
+}
+
+#readings-table-container table {
+
+  background-color: white;
+
+}
+
+#chart-container {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+#readings-chart {
+  max-height: 400px;
+}
+
+.download-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.download-box-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 350px;
+}
+
+.station-chart-row [class*="col"] {
+  height: auto;
+}
+
+.station-chart-box {
+  display: block !important;
+  height: auto !important;
+  background-color: white !important;
+  color: black !important;
+  padding: 1rem;
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.station-chart-box h6 {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.station-chart-box button {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.station-chart-box canvas {
+  display: block;
+  width: 100% !important;
+  max-height: 300px;
+}

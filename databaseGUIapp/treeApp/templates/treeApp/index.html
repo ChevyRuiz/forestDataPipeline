@@ -1,0 +1,637 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  >
+
+  <title>Connected Forest</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  >
+
+  <link
+    href="{% static 'treeApp/grid.css' %}?v=9"
+    rel="stylesheet"
+  >
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Données de la forêt connectée</h1>
+
+  <p class="lead">
+    Visualisation semi temps réel des données environnementales recueillies
+    par les capteurs situés à la forêt connectée du lac Duparquet.
+  </p>
+
+  <!-- BOP EXP -->
+
+  <h3>Station Bouleaux de papier : expérience de sécheresse</h3>
+
+  <h5>Arbres</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Dendromètres</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-EXP', 'dendrometer')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-EXP-dendrometer"></canvas>
+    </div>
+
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Sapflow</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-EXP', 'sapflow')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-EXP-sapflow"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center arbres">
+    {% for i in "12345" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectTree(this, 'BOP-EXP', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h5>Capteurs d'humidité du sol</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 station-chart-box">
+      <h6>CS616</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-EXP', 'CS616')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-EXP-CS616"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center capteur-sol">
+    {% for i in "1234" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectSoil(this, 'BOP-EXP', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- BOP CTRL -->
+
+  <h3>Station Bouleaux de papier : contrôle</h3>
+
+  <h5>Arbres</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Dendromètres</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-CTRL', 'dendrometer')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-CTRL-dendrometer"></canvas>
+    </div>
+
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Sapflow</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-CTRL', 'sapflow')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-CTRL-sapflow"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center arbres">
+    {% for i in "123457891234567" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectTree(this, 'BOP-CTRL', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h5>Capteurs d'humidité du sol</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 station-chart-box">
+      <h6>CS616</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('BOP-CTRL', 'CS616')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-BOP-CTRL-CS616"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center capteur-sol">
+    {% for i in "123" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectSoil(this, 'BOP-CTRL', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+  <!-- EPN EXP -->
+
+  <h3>Station Épinettes : expérience de sécheresse</h3>
+
+  <h5>Arbres</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Dendromètres</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-EXP', 'dendrometer')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-EXP-dendrometer"></canvas>
+    </div>
+
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Sapflow</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-EXP', 'sapflow')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-EXP-sapflow"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center arbres">
+    {% for i in "123456789" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectTree(this, 'EPN-EXP', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h5>Capteurs d'humidité du sol</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 station-chart-box">
+      <h6>CS616</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-EXP', 'CS616')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-EXP-CS616"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center capteur-sol">
+    {% for i in "1234" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectSoil(this, 'EPN-EXP', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- EPN CTRL -->
+
+  <h3>Station Épinettes : contrôle</h3>
+
+  <h5>Arbres</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Dendromètres</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-CTRL', 'dendrometer')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-CTRL-dendrometer"></canvas>
+    </div>
+
+    <div class="col-12 col-md-6 station-chart-box">
+      <h6>Sapflow</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-CTRL', 'sapflow')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-CTRL-sapflow"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center arbres">
+    {% for i in "12345678912" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectTree(this, 'EPN-CTRL', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h5>Capteurs d'humidité du sol</h5>
+
+  <div class="row station-chart-row">
+    <div class="col-12 station-chart-box">
+      <h6>CS616</h6>
+      <button class="btn btn-primary mb-2" onclick="openStationDownloadBox('EPN-CTRL', 'CS616')">
+        Télécharger les données
+      </button>
+      <canvas id="chart-EPN-CTRL-CS616"></canvas>
+    </div>
+  </div>
+
+  <div class="row text-center capteur-sol">
+    {% for i in "123" %}
+      <div
+        class="col-12 col-md sensor-block"
+        onclick="selectSoil(this, 'EPN-CTRL', {{ forloop.counter }})"
+      >
+        {{ forloop.counter }}
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script>
+let selectedStationCode = null;
+let selectedSensorNumber = null;
+let selectedSensorType = null;
+let readingsChart = null;
+const stationCharts = {};
+
+function clearSelection() {
+  document.querySelectorAll(".sensor-block, .detail-block").forEach(el => {
+    el.classList.remove("selected");
+  });
+}
+
+function removeDetails() {
+  document.querySelectorAll(".dynamic-details").forEach(el => {
+    el.remove();
+  });
+}
+
+function selectTree(element, stationcode, sensornumber) {
+  clearSelection();
+  removeDetails();
+
+  selectedStationCode = stationcode;
+  selectedSensorNumber = sensornumber;
+
+  element.classList.add("selected");
+
+  const details = document.createElement("div");
+  details.className = "dynamic-details mt-2";
+
+  details.innerHTML = `
+    <div class="row text-center detail-row mb-2">
+      <div
+        class="col-12 detail-block"
+        onclick="selectDetail(this, 'dendrometer')"
+      >
+        Dendromètre
+      </div>
+    </div>
+
+    <div class="row text-center detail-row">
+      <div
+        class="col-12 detail-block"
+        onclick="selectDetail(this, 'sapflow')"
+      >
+        Sapflow
+      </div>
+    </div>
+
+    <div id="chart-container" class="mt-3"></div>
+  `;
+
+  const parentRow = element.closest(".row");
+  parentRow.parentNode.insertBefore(details, parentRow.nextSibling);
+}
+
+function selectSoil(element, stationcode, sensornumber) {
+  clearSelection();
+  removeDetails();
+
+  selectedStationCode = stationcode;
+  selectedSensorNumber = sensornumber;
+  selectedSensorType = "CS616";
+
+  element.classList.add("selected");
+
+  const details = document.createElement("div");
+  details.className = "dynamic-details mt-2";
+
+  details.innerHTML = `
+    <div id="chart-container" class="mt-3"></div>
+  `;
+
+  const parentRow = element.closest(".row");
+
+  parentRow.parentNode.insertBefore(
+    details,
+    parentRow.nextSibling
+  );
+
+  fetch(
+    `/last-readings/?stationcode=${selectedStationCode}&sensornumber=${selectedSensorNumber}&sensortype=CS616`
+  )
+    .then(response => response.json())
+    .then(data => {
+      renderReadingsChart(data.readings, "CS616");
+    });
+}
+
+function selectDetail(element, sensortype) {
+  selectedSensorType = sensortype;
+
+  document.querySelectorAll(".detail-block").forEach(el => {
+    el.classList.remove("selected");
+  });
+
+  element.classList.add("selected");
+
+  fetch(`/last-readings/?stationcode=${selectedStationCode}&sensornumber=${selectedSensorNumber}&sensortype=${sensortype}`)
+    .then(response => response.json())
+    .then(data => renderReadingsChart(data.readings, sensortype));
+}
+
+function renderReadingsChart(readings, sensortype) {
+  const container = document.getElementById("chart-container");
+
+  container.innerHTML = `
+    <button
+      class="btn btn-primary mb-3"
+      onclick="openDownloadBox()"
+    >
+      Télécharger les données
+    </button>
+
+    <canvas id="readings-chart"></canvas>
+
+    <p
+      id="last-record-legend"
+      class="text-muted mt-2"
+    >
+    </p>
+  `;
+
+  const canvas = document.getElementById("readings-chart");
+  const legend = document.getElementById("last-record-legend");
+
+  if (readingsChart !== null) {
+    readingsChart.destroy();
+  }
+
+  if (readings.length === 0) {
+    legend.textContent = "Aucune donnée trouvée pour le dernier mois.";
+    return;
+  }
+
+  const labels = readings.map(reading => reading.measured_at);
+  const values = readings.map(reading => reading.value);
+
+  const lastReading = readings[readings.length - 1];
+  const unit = lastReading.unit;
+
+  readingsChart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: `${sensortype} (${unit})`,
+          data: values,
+          tension: 0.2,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Temps"
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: `Mesure (${unit})`
+          }
+        }
+      }
+    }
+  });
+
+  legend.textContent = `Dernier enregistrement : ${lastReading.measured_at}`;
+}
+
+function openDownloadBox() {
+  document.getElementById("download-box").dataset.mode = "sensor";
+
+  fetch(`/reading-date-limits/?stationcode=${selectedStationCode}&sensornumber=${selectedSensorNumber}&sensortype=${selectedSensorType}`)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.has_data) {
+        alert("Aucune donnée disponible pour ce capteur.");
+        return;
+      }
+
+      fillAndShowDownloadBox(data);
+    });
+}
+
+function closeDownloadBox() {
+  document.getElementById("download-box").classList.add("d-none");
+}
+
+function downloadCsv() {
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
+  const mode = document.getElementById("download-box").dataset.mode;
+
+  if (!startDate || !endDate) {
+    alert("Veuillez sélectionner une date de début et une date de fin.");
+    return;
+  }
+
+  if (startDate > endDate) {
+    alert("La date de début doit être avant la date de fin.");
+    return;
+  }
+
+  let url;
+
+  if (mode === "station") {
+    url =
+      `/download-station-csv/?stationcode=${selectedStationCode}` +
+      `&sensortype=${selectedSensorType}` +
+      `&start_date=${startDate}` +
+      `&end_date=${endDate}`;
+  } else {
+    url =
+      `/download-readings-csv/?stationcode=${selectedStationCode}` +
+      `&sensornumber=${selectedSensorNumber}` +
+      `&sensortype=${selectedSensorType}` +
+      `&start_date=${startDate}` +
+      `&end_date=${endDate}`;
+  }
+
+  window.location.href = url;
+  closeDownloadBox();
+}
+
+function loadStationChart(stationcode, sensortype) {
+  fetch(`/station-readings/?stationcode=${stationcode}&sensortype=${sensortype}`)
+    .then(response => response.json())
+    .then(data => {
+      const readings = data.readings;
+
+      const labels = [...new Set(readings.map(r => r.measured_at))];
+
+      const sensorNumbers = [...new Set(readings.map(r => r.sensornumber))];
+
+      const datasets = sensorNumbers.map(sensorNumber => {
+        const valuesByTime = {};
+
+        readings
+          .filter(r => r.sensornumber === sensorNumber)
+          .forEach(r => {
+            valuesByTime[r.measured_at] = r.value;
+          });
+
+        return {
+          label: `Capteur ${sensorNumber}`,
+          data: labels.map(time => valuesByTime[time] ?? null),
+          fill: false,
+          tension: 0,
+          pointRadius: 1,
+          spanGaps: false
+        };
+      });
+
+      const canvas = document.getElementById(`chart-${stationcode}-${sensortype}`);
+
+      new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Temps"
+              },
+              ticks: {
+                maxTicksLimit: 8
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Mesure"
+              }
+            }
+          }
+        }
+      });
+    });
+}
+
+function openStationDownloadBox(stationcode, sensortype) {
+  selectedStationCode = stationcode;
+  selectedSensorNumber = null;
+  selectedSensorType = sensortype;
+
+  document.getElementById("download-box").dataset.mode = "station";
+
+  fetch(`/station-date-limits/?stationcode=${stationcode}&sensortype=${sensortype}`)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.has_data) {
+        alert("Aucune donnée disponible.");
+        return;
+      }
+
+      fillAndShowDownloadBox(data);
+    });
+}
+
+function fillAndShowDownloadBox(data) {
+  const startInput = document.getElementById("start-date");
+  const endInput = document.getElementById("end-date");
+
+  startInput.min = data.min_date;
+  startInput.max = data.max_date;
+  startInput.value = data.min_date;
+
+  endInput.min = data.min_date;
+  endInput.max = data.max_date;
+  endInput.value = data.max_date;
+
+  document.getElementById("download-box").classList.remove("d-none");
+}
+
+loadStationChart("EPN-EXP", "dendrometer");
+loadStationChart("EPN-EXP", "sapflow");
+loadStationChart("EPN-EXP", "CS616");
+
+loadStationChart("EPN-CTRL", "dendrometer");
+loadStationChart("EPN-CTRL", "sapflow");
+loadStationChart("EPN-CTRL", "CS616");
+
+loadStationChart("BOP-EXP", "dendrometer");
+loadStationChart("BOP-EXP", "sapflow");
+loadStationChart("BOP-EXP", "CS616");
+
+loadStationChart("BOP-CTRL", "dendrometer");
+loadStationChart("BOP-CTRL", "sapflow");
+loadStationChart("BOP-CTRL", "CS616");
+</script>
+
+<div id="download-box" class="download-box d-none">
+  <div class="download-box-content">
+    <h5>Télécharger les données</h5>
+
+    <label for="start-date">Date de début</label>
+    <input type="date" id="start-date" class="form-control mb-2">
+
+    <label for="end-date">Date de fin</label>
+    <input type="date" id="end-date" class="form-control mb-3">
+
+    <button class="btn btn-success" onclick="downloadCsv()">
+      Télécharger
+    </button>
+
+    <button class="btn btn-secondary" onclick="closeDownloadBox()">
+      Annuler
+    </button>
+  </div>
+</div>
+
+</body>
+</html>
